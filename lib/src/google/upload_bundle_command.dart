@@ -37,8 +37,8 @@ class UploadBundle extends Command<dynamic> {
 
       var newEdit = await edits.insert(AppEdit(), packageName);
 
-      final requester =
-          ApiRequester(httpClient, 'https://androidpublisher.googleapis.com/', '', _requestHeaders);
+      final requester = ApiRequester(httpClient,
+          'https://androidpublisher.googleapis.com/', '', _requestHeaders);
 
       final editsBundle = EditsBundlesResource(requester);
 
@@ -46,7 +46,8 @@ class UploadBundle extends Command<dynamic> {
 
       var media = Media(bundle.openRead(), bundle.lengthSync());
 
-      await editsBundle.upload(packageName, newEdit.id.toString(), uploadMedia: media);
+      await editsBundle.upload(packageName, newEdit.id.toString(),
+          uploadMedia: media);
 
       edits.commit(packageName, newEdit.id.toString());
     } finally {

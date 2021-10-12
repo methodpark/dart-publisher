@@ -5,9 +5,9 @@ import 'package:args/command_runner.dart';
 import 'google/google_play_command.dart';
 
 Future<void> run(List<String> args) async {
-  var runner =
-      CommandRunner<dynamic>('publisher', 'Tool for release automation of cross-platform apps')
-        ..addCommand(GooglePlay());
+  var runner = CommandRunner<dynamic>(
+      'publisher', 'Tool for release automation of cross-platform apps')
+    ..addCommand(GooglePlay());
 
   try {
     await runner.run(args);
