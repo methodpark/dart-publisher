@@ -1,14 +1,10 @@
 # Publisher
 
-![Build Status](https://github.com/methodpark/dart-publisher/actions/workflows/github-actions/badge.svg)
+<a href="https://github.com/methodpark/dart-publisher/actions?query=branch%3Amain"><img src="https://github.com/methodpark/dart-publisher/actions/workflows/github-actions.yml/badge.svg" alt="build status"></a>
+<a href="https://pub.dev/packages/publisher"><img src="https://img.shields.io/pub/v/publisher.svg" alt="pub package"></a>
+<a href="https://github.com/methodpark/dart-publisher/issues"><img src="https://img.shields.io/github/issues-raw/methodpark/dart-publisher" alt="open issues" /></a>
 
 This is a dart tool for the release automation of cross-platform apps.
-
-The installation can be done easily as a global command line tool with the following statement:
-
-```shell
-dart pub global activate publisher
-```
 
 ## Google Play
 
@@ -20,6 +16,12 @@ For using the Google Play features a Google Cloud service account with the corre
 
 ```shell
 publisher googleplay uploadBundle -p PATHTOAPPBUNDLE -n PACKAGENAME
+```
+
+### Create a new release
+
+```shell
+publisher googleplay release -n PACKAGENAME -t TRACK -v VERSION -s STATUS --releaseName RELEASENAME --releaseNotes NOTES
 ```
 
 ## App Store Connect

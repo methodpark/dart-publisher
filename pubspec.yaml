@@ -1,6 +1,6 @@
 name: publisher
 description: Tool for release automation of cross-platform apps. It provides a handy interface for Google Play and App Store Connect.
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/methodpark/dart-publisher
 repository: https://github.com/methodpark/dart-publisher
 issue_tracker: https://github.com/methodpark/dart-publisher/issues
@@ -15,6 +15,7 @@ dependencies:
   args: ^2.3.0
   googleapis: ^5.0.1
   googleapis_auth: ^1.1.0
+  http: ^0.13.4
   _discoveryapis_commons: ^1.0.2
 
 dev_dependencies:
