@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:_discoveryapis_commons/_discoveryapis_commons.dart';
-import 'package:args/command_runner.dart';
 import 'package:googleapis/androidpublisher/v3.dart';
-import 'package:googleapis_auth/auth_io.dart';
 
-class UploadBundle extends Command<dynamic> {
+import '../common/google_command.dart';
+
+class UploadBundle extends GoogleCommand {
   @override
   final name = 'uploadBundle';
 
@@ -17,41 +17,29 @@ class UploadBundle extends Command<dynamic> {
     argParser.addOption('packageName', abbr: 'n', mandatory: true);
   }
 
-  final _requestHeaders = {
-    'user-agent': 'google-api-dart-client/5.0.1',
-    'x-goog-api-client': 'gl-dart/$dartVersion gdcl/5.0.1',
-  };
-
   @override
   Future<void> run() async {
-    final bundlePath = argResults!['bundlePath'].toString();
-    final packageName = argResults!['packageName'].toString();
+    final bundlePath = getArgResult('bundlePath')!;
+    final packageName = getArgResult('packageName')!;
 
-    final httpClient = await clientViaApplicationDefaultCredentials(
-        scopes: [AndroidPublisherApi.androidpublisherScope]);
+    final client = await createClient();
 
     try {
-      final publisherApi = AndroidPublisherApi(httpClient);
-
+      final publisherApi = AndroidPublisherApi(client);
       var edits = publisherApi.edits;
+      var editId = await newEditId(edits, packageName);
 
-      var newEdit = await edits.insert(AppEdit(), packageName);
-
-      final requester = ApiRequester(httpClient,
-          'https://androidpublisher.googleapis.com/', '', _requestHeaders);
-
-      final editsBundle = EditsBundlesResource(requester);
+      final editsBundle = bundlesResource(client);
 
       var bundle = File(bundlePath);
 
       var media = Media(bundle.openRead(), bundle.lengthSync());
 
-      await editsBundle.upload(packageName, newEdit.id.toString(),
-          uploadMedia: media);
+      await editsBundle.upload(packageName, editId, uploadMedia: media);
 
-      edits.commit(packageName, newEdit.id.toString());
+      edits.commit(packageName, editId);
     } finally {
-      httpClient.close();
+      client.close();
     }
   }
 }
