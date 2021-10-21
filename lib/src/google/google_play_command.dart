@@ -1,5 +1,6 @@
 import 'package:args/command_runner.dart';
 
+import 'release_command.dart';
 import 'upload_bundle_command.dart';
 
 class GooglePlay extends Command<dynamic> {
@@ -10,5 +11,6 @@ class GooglePlay extends Command<dynamic> {
 
   GooglePlay() {
     addSubcommand(UploadBundle());
+    addSubcommand(Release());
   }
 }
