@@ -1,18 +1,15 @@
 import 'package:_discoveryapis_commons/_discoveryapis_commons.dart';
-import 'package:args/command_runner.dart';
 import 'package:googleapis/androidpublisher/v3.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart';
 
-abstract class GoogleCommand extends Command<dynamic> {
+import 'general_command.dart';
+
+abstract class GoogleCommand extends GeneralCommand {
   final requestHeaders = {
     'user-agent': 'google-api-dart-client/5.0.1',
     'x-goog-api-client': 'gl-dart/$dartVersion gdcl/5.0.1',
   };
-
-  String? getArgResult(String argumentName) {
-    return argResults?[argumentName].toString().trim();
-  }
 
   Future<AutoRefreshingAuthClient> createClient() {
     return clientViaApplicationDefaultCredentials(
