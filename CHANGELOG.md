@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+* App Store Connect Support
+  * List provisioning profiles
+  * Installing provisioning profiles
+
 ## 0.2.0
 
 * Add support for creating releases on Google Play
