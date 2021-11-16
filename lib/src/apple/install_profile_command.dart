@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:app_store_connect_apis/app_store_connect.dart';
 import 'package:path/path.dart';
 
-import '../common/app_store_connect_command.dart';
+import '../common/apple_command.dart';
 
-class InstallProfile extends AppStoreConnectCommand {
+class InstallProfile extends AppleCommand {
   @override
   final name = 'installProfile';
 
@@ -25,6 +25,8 @@ class InstallProfile extends AppStoreConnectCommand {
     }
 
     final profileId = getArgResult('profileId')!;
+
+    final appStoreConnect = createAppStoreConnectClient();
 
     var profile = await appStoreConnect.downloadProfile(profileId);
 

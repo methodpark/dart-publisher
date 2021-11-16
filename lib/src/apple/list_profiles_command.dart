@@ -1,6 +1,6 @@
-import 'package:publisher/src/common/app_store_connect_command.dart';
+import '../common/apple_command.dart';
 
-class ListProfiles extends AppStoreConnectCommand {
+class ListProfiles extends AppleCommand {
   @override
   final name = 'listProfiles';
 
@@ -9,6 +9,8 @@ class ListProfiles extends AppStoreConnectCommand {
 
   @override
   Future<void> run() async {
+    final appStoreConnect = createAppStoreConnectClient();
+
     var allProfiles = await appStoreConnect.getAllProfiles();
 
     print(allProfiles);
