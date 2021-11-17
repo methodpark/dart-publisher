@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+* Fix hard dependency to the apple environment variables
+* Add some more help information
+
 ## 0.3.0
 
 * App Store Connect Support
