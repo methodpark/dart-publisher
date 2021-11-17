@@ -11,11 +11,40 @@ class Release extends GoogleCommand {
 
   Release() {
     argParser.addOption('packageName', abbr: 'n', mandatory: true);
-    argParser.addOption('track', abbr: 't', mandatory: true);
-    argParser.addOption('version', abbr: 'v', mandatory: true);
-    argParser.addOption('status', abbr: 's', mandatory: true);
+    argParser.addOption(
+      'track',
+      abbr: 't',
+      mandatory: true,
+      allowed: [
+        "internal",
+        "alpha",
+        "beta",
+        "production",
+      ],
+    );
+    argParser.addOption(
+      'version',
+      abbr: 'v',
+      mandatory: true,
+      help: 'The version code of the APK, as specified in the manifest file.',
+    );
+    argParser.addOption(
+      'status',
+      abbr: 's',
+      mandatory: true,
+      allowed: [
+        "draft",
+        "inProgress",
+        "halted",
+        "completed",
+      ],
+    );
     argParser.addOption('releaseName', mandatory: false);
-    argParser.addOption('releaseNotes', mandatory: false);
+    argParser.addOption(
+      'releaseNotes',
+      mandatory: false,
+      help: 'Localized release notes (en-GB).',
+    );
   }
 
   @override
